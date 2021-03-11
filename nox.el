@@ -210,7 +210,7 @@ as 0, i.e. don't block at all."
   "If non-nil, shut down server after killing last managed buffer."
   :type 'boolean)
 
-(defcustom nox-send-changes-idle-time 0.5
+(defcustom nox-send-changes-idle-time 2.0
   "Don't tell server of changes before Emacs's been idle for this many seconds."
   :type 'number)
 
@@ -1850,6 +1850,7 @@ is not active."
                                        :textDocument/completion
                                        (nox--CompletionParams)
                                        :deferred :textDocument/completion
+                                       :timeout 0.05
                                        :cancel-on-input t))
                 (setq items (append
                              (if (vectorp resp) resp (plist-get resp :items))
